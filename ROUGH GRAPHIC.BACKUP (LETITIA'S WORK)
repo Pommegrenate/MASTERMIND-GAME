@@ -1,0 +1,105 @@
+from graphics import *
+
+
+# Starting screen
+startScreen=GraphWin ("Catch Levoski: Title Screen", 500, 500);
+
+title=Text (Point (250, 150), ("Catch Levoski"));
+title.setFace ("courier");
+title.setSize (36);
+title.setStyle ("bold");
+title.draw (startScreen);
+
+subheading=Text (Point (250, 200), ("Are you ready to catch the \n"
+                                    "undercover spy, Levoski?"));
+subheading.setFace ("courier");
+subheading.setSize (15);
+subheading.draw (startScreen);
+
+start=Text (Point (250, 400), ("Start"));
+start.setFace ("helvetica");
+start.setSize (15);
+start.draw (startScreen);
+
+time.sleep (3);
+startScreen.close ();
+
+
+# Introduction Screen (Storyline/Plot)
+introScreen=GraphWin ("Catch Levoski: Introduction", 500, 500);
+
+introTitle=Text (Point (250, 50), ("Introduction"));
+introTitle.setFace ("helvetica");
+introTitle.setSize (25);
+introTitle.setStyle ("bold");
+introTitle.draw (introScreen);
+
+underline=Line (Point (150, 65), Point (350, 65));
+underline.setWidth (3);
+underline.draw (introScreen);
+
+story=Text (Point (250, 200), ("Hello, Fabulous Bureau of Liberations (FBL) \n"
+                               "secret agent. This is the FBL headquarters. \n\n"
+                               "Levoski, the undercover spy, has captured \n"
+                               "your partner, Alina. She's trapped in a \n"
+                               "locked room with him and it's up to you to \n"
+                               "free her. You're the only FBL agent able to \n"
+                               "do it. You just need to get past this locked \n"
+                               "door to get to him. You'll need to use your \n"
+                               "logical thinking and deduction skills to \n"
+                               "solve his tricky code. \n\n"
+                               "Good luck agent, report back soon."));
+story.setFace ("courier");
+story.setSize (12);
+story.draw (introScreen);
+
+nextPage=Text (Point (250, 475), ("Next Page >>"));
+nextPage.setFace ("helvetica");
+nextPage.setSize (10);
+nextPage.setStyle ("italic");
+nextPage.draw (introScreen);
+
+skip=Text (Point (475, 475), ("Skip"));
+skip.setFace ("helvetica");
+skip.setSize (10);
+skip.setStyle ("italic");
+skip.draw (introScreen);
+
+time.sleep (3);
+introScreen.close ();
+
+
+# How to Play/Rules Screen
+howToPlayScreen=GraphWin ("Catch Levoski: How to Play & Rules", 500, 500);
+
+rulesTitle=Text (Point (250, 50), ("How to Play & Rules"));
+rulesTitle.setFace ("helvetica");
+rulesTitle.setSize (25);
+rulesTitle.setStyle ("bold");
+rulesTitle.draw (howToPlayScreen);
+
+underline=Line (Point (90, 65), Point (410, 65));
+underline.setWidth (3);
+underline.draw (howToPlayScreen);
+
+howToPlay=Text (Point (250, 200), ("rtueshrfsyw Gonna be instructions on how to play"));
+howToPlay.setFace ("courier");
+howToPlay.setSize (12);
+howToPlay.draw (howToPlayScreen);
+
+rules=Text (Point (250, 300), ("geshrtu These are the rules maybe idk"));
+rules.setFace ("courier");
+rules.setSize (12);
+rules.draw (howToPlayScreen);
+
+prevPage=Text (Point (250, 475), ("<< Prev. Page"));
+prevPage.setFace ("helvetica");
+prevPage.setSize (10);
+prevPage.setStyle ("italic");
+prevPage.draw (howToPlayScreen);
+
+ok=Text (Point (475, 475), ("OK"));
+ok.setFace ("helvetica");
+ok.setSize (10);
+ok.setStyle ("italic");
+ok.draw (howToPlayScreen);
