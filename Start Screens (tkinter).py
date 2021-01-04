@@ -11,7 +11,7 @@ startScreen.resizable(width=FALSE, height=FALSE);
 
 c = 250; # center of window
 
-bgImage = PhotoImage(file = "C:\\Users\\Letitia\\Pictures\\FBL Badge.png");
+bgImage = PhotoImage(file = "C:\\Users\\Letitia\\Pictures\\FBL Badge.png"); # Everyone will need to change it to the file location of where they put this badge image
 bg = Label (startScreen, image = bgImage, bg = "grey");
 bg.place (x = 0, y = 0, relwidth = 1, relheight = 1);
 
@@ -25,7 +25,7 @@ title = Label (titleFrame, text = "Catch Levoski");
 title['font'] = ("Courier", 32, "bold");
 title.pack ();
 
-subheading = Label (headingFrame, text = "Are you ready to catch the undercover \n"
+subheading = Label (headingFrame, text = "Are you ready to catch the undercover\n"
                                          "spy, Levoski?");
 subheading['font'] = ("Courier", 14);
 subheading.pack ();
@@ -50,16 +50,16 @@ startScreen.mainloop();
 ##introTitle['font'] = ("Helvetica", 25, "bold", "underline");
 ##introTitle.place (x = c, y = 25, anchor = 'center');
 ##
-##story = Label (introScreen, text = "Hello, Fabulous Bureau of Liberations (FBL) \n"
-##                                    "secret agent. This is the FBL headquarters. \n\n"
-##                                    "Levoski, the undercover spy, has captured \n"
-##                                    "your partner, Alina. She's trapped in a \n"
-##                                    "locked room with him and it's up to you to \n"
-##                                    "free her. You're the only FBL agent able to \n"
-##                                    "do it. You just need to get past this locked \n"
-##                                    "door to get to him. You'll need to use your \n"
-##                                    "logical thinking and deduction skills to \n"
-##                                    "solve his tricky code. \n\n"
+##story = Label (introScreen, text = "Hello, Fabulous Bureau of Liberations (FBL)\n"
+##                                    "secret agent. This is the FBL headquarters.\n\n"
+##                                    "Levoski, the undercover spy, has captured\n"
+##                                    "your partner, Alina. She's trapped in a\n"
+##                                    "locked room with him and it's up to you to\n"
+##                                    "free her. You're the only FBL agent able to\n"
+##                                    "do it. You just need to get past this locked\n"
+##                                    "door to get to him. You'll need to use your\n"
+##                                    "logical thinking and deduction skills to\n"
+##                                    "solve his tricky code.\n\n"
 ##                                    "Good luck agent, report back soon.");
 ##story['font'] = ("Courier", 12);
 ##story.place (x = c, y = 200, anchor = 'center');
@@ -78,22 +78,38 @@ startScreen.mainloop();
 
 ##howToPlayScreen = tk.Tk();
 ##howToPlayScreen.title ("Catch Levoski: How to Play & Rules");
-##howToPlayScreen.geometry ("500x500");
+##howToPlayScreen.geometry ("750x500");
 ##howToPlayScreen.resizable(width=FALSE, height=FALSE);
 ##
-##c = 250;
+##c = 750/2;
 ##
 ##rulesTitle = Label (howToPlayScreen, text = "How to Play & Rules");
 ##rulesTitle['font'] = ("Helvetica", 25, "bold", "underline");
 ##rulesTitle.place (x = c, y = 25, anchor = 'center');
 ##
-##instructions = Label (howToPlayScreen, text = "afa");
-##instructions['font'] = ("Courier", 12);
-##instructions.place (x = c, y = 200, anchor = 'center');
-##
-##rules = Label (howToPlayScreen, text = "ffafaaf");
-##rules['font'] = ("Courier", 12);
-##rules.place (x = c, y = 400, anchor = 'center');
+##instructions = Label (howToPlayScreen,
+##                      text = "The door lock will have a randomly generated 4-digit code and you will have 12 tries to\n"
+##                             "guess the correct code. If you don't guess it correctly in those 12 tries, then you wll \n"
+##                             "fail the mission and Levoski will get away. Remember, the code can have duplicate numbers. \n"
+##                             "For example the code could be '2533' or '1141'. \n\n"
+##                             "To input your guess, use the 6 different numbers given at the bottom of the screen. \n"
+##                             "If you make a mistake inputting your code, then you can redo that guess by pressing \n"
+##                             "the 'Redo' button underneath the 6 numbers. \n"
+##                             "When you are ready to submit your 4-digit guess, click on the 'Check' button beside the \n"
+##                             "'Redo' button. \n\n"
+##                             "When you submit your guess, the door will check if any of your inputs were correct \n"
+##                             "using these indicators: \n"
+##                             " - White dot when you guess a correct number but not in the correct position \n"
+##                             " - Green dot when you guess a correct number AND in the correct position \n"
+##                             " - Red dot when a number is not correct \n"
+##                             "There will be 4 dots in total, the same as the number of digits in the code. \n\n"
+##                             "If you did not correctly guess the entire code, then you'll have another guess, \n"
+##                             "but you only have 12 in total so be careful. \n\n"
+##                             "If you do guess the correct code, then you win! You made it in time to save Alina \n"
+##                             "and beat Levoski!",
+##                      justify = LEFT);
+##instructions['font'] = ("Courier", 10);
+##instructions.place (x = c, y = 250, anchor = 'center');
 ##
 ##prevPage = Button (howToPlayScreen, text = "<< Prev. Page", command = introduction);
 ##prevPage.place (x = c, y = 475, anchor = 'center');
