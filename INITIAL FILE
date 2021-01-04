@@ -1,0 +1,69 @@
+
+from random import randint
+
+arrayOfInput = ['1', '2', '3', '4']
+
+# Secret code (Random numbers)
+def code ():
+    secretArrangement = ''
+
+    while len(secretArrangement) != 4 :
+    # While the number of arrayOfArrangement is NOT 4
+
+        randomNumber = str(randint(1, 6)); # There are 6 numbers
+        secretArrangement = secretArrangement + randomNumber;
+
+    arrayOfArrangement = list(secretArrangement);
+
+    print (arrayOfArrangement)
+    return arrayOfArrangement
+
+
+
+# Digits that are the correct number NOT in the correct position
+def number (arrayOfArrangement):
+    rightNum = 0
+
+    count = 4;
+
+    y = 0;
+
+    while count != 0:
+
+         for item in range (0, 4):
+
+              if arrayOfInput[y] == arrayOfArrangement[item]:
+                   arrayOfInput[y] = 'empty'
+                   arrayOfArrangement[item] = ''
+                   rightNum += 1;
+                   print (arrayOfArrangement);
+                   
+         y += 1
+
+         count -= 1
+
+    print (rightNum);
+    return(rightNum);
+
+
+# Digits that are the correct number AND in the correct position
+def position (arrayOfArrangement):
+    rightPosition = 0
+
+    for x in range (0,4):
+        if arrayOfInput[x] == arrayOfArrangement[x]:
+            rightPosition += 1
+
+    print (rightPosition);
+    return(rightPosition);
+
+
+
+array = code()
+bothRight = position(array)
+oneRight = number(array)
+
+
+print("The numbers that are correct colour and in the correct positions:  ", bothRight)
+print("The numbers that are correct colour regardless of positions:  ", oneRight)
+
