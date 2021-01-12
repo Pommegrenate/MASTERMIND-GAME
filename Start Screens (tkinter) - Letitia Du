@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
+
 def startCommands ():
     introduction ();
     startScreen.destroy ();
@@ -26,7 +27,7 @@ def gameTitle ():
 
     c = 250; # center of window
 
-    bgImage = PhotoImage(file = "C:\\Users\\Letitia\\Pictures\\FBL Badge.png"); # You'll need to change what's in quotes to the file location of where you put this image
+    bgImage = PhotoImage(file = "FBL Badge.png");
     bg = Label (startScreen, image = bgImage, bg = "grey");
     bg.place (x = 0, y = 0, relwidth = 1, relheight = 1);
 
