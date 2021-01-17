@@ -1,10 +1,9 @@
 import tkinter as tk
-from random import randint
-
-
+from tkinter import *
 
 from random import randint
 
+"Temporary Input Code ----- WILL DELETE LATER"
 arrayOfInput = ['1', '2', '3', '4']
 
 # Secret code (Random numbers)
@@ -71,46 +70,56 @@ bothRight = position(array)
 oneRight = number(array)
 
 
-red = "red"
 inputList = ''
-numberOfGuess = 0
-
-window = tk.Tk()
-window.title("Mastermind Game")
+numOfGuess = 0
 
 
 
+window = tk.Tk ();
+window.title ("Catch Levoski");
+window.geometry ("200x200");
 
+q = 10
+# Code for the indicators
+# Position + number is correct
+for star in range (0, bothRight):
+    bothIndic = Label (window, text = "*", fg = "red")
+    bothIndic['font'] = ("Helvetica", 20);
+    bothIndic.place (x = q, y = 25,);
+    q += 25
+ 
 
-#Code for the indicators
-for circle in range (0, bothRight):
-     lblcircle = tk.Label(window, text = "*", fg = "red"). grid(row=1, column= circle);
+# Number is correct
+for star in range (0, oneRight):
+    oneIndic = Label (window, text = "*", fg = "grey")
+    oneIndic['font'] = ("Helvetica", 20);
+    oneIndic.place (x = q, y = 25);
+    q += 25
 
+# Not correct
+noneRight = 4 - bothRight - oneRight
 
-for circle in range (0, oneRight):
-     lblcircle = tk.Label(window, text = "*", fg = "grey"). grid(row=1, column= bothRight + circle);
-
-leftover = 4 - bothRight - oneRight
-
-for circle in range (0, leftover):
-     lblcircle = tk.Label(window, text = "*", fg = "black"). grid(row=1, column= bothRight + oneRight + circle);
+for star in range (0, noneRight):
+    noneIndic = Label (window, text = "*", fg = "black")
+    noneIndic['font'] = ("Helvetica", 20);
+    noneIndic.place (x = q + star, y = 25);
+    q += 25
+    
+     
 
 
 
 
 if bothRight == 0:
-     percentage = "you dumbass, you got 0"
+    percentage = "You dumbass, you got 0"
 
 else:
-     percentage = float((bothRight / 4) * 100);
+    percentage = float((bothRight / 4) * 100);
 
 
-lblpercentage = tk.Label(window, text = str(percentage) + "%", fg = "black"). grid(row=2, column= circle, columnspan = 5);
+percent = Label (window, text = str(percentage) + "%", fg = "black"). grid(row=2, column= star, columnspan = 5);
 
 
-
-     
-     
 
 
 
