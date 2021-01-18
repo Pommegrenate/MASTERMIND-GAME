@@ -1,0 +1,140 @@
+import tkinter as tk
+from tkinter import *
+from random import randint
+
+
+inputList = ''
+numberOfGuess = 0
+state = "empty"
+window = tk.Tk()
+window.title("Mastermind Game")
+
+
+# Secret code (Random numbers)
+def code ():
+    secretArrangement = ''
+
+    while len(secretArrangement) != 4 :
+    # While the number of arrayOfArrangement is NOT 4
+
+        randomNumber = str(randint(1, 6)); # There are 6 numbers
+        secretArrangement = secretArrangement + randomNumber;
+
+    arrayOfArrangement = list(secretArrangement);
+
+    print (arrayOfArrangement)
+    return arrayOfArrangement
+
+
+
+array = code()
+
+
+
+
+lblInst = tk.Label(window, text = "MASTERMIND", fg = "red"). grid(row=0, column=0)
+lblLine0 = tk.Label(window, text = "************we'll design empty space if we can************").grid(row=1, column=0)
+lblNGuess = tk.Label(window, text = "Number of Guesses:  " + str(numberOfGuess)).grid(row=4, column=0)
+lblSecArrangement = tk.Label(window, text="We'll show the secret arrangement here").grid(row=10, column=0)
+lblEmptyLine = tk.Label(window, text = "").grid(row=15, column=0, columnspan=5)
+
+
+buttons = []
+for number in range(0, 7):
+    button = tk.Button(window, text=number, command=lambda number=number: userInput(number), state = tk.DISABLED)
+    buttons.append(button)
+
+btnStartGame = tk.Button(window, text="Start Game", command=lambda : start())
+btnEraseGame = tk.Button(window, text="Erase", command=lambda : erase())
+btnCheck = tk.Button(window, text="Check", command=lambda : position(array), state = tk.DISABLED)
+
+for col in range(1, 7):
+          buttons[col].grid(row= 11, column=col)
+
+btnStartGame.grid(row=14, column=0)
+btnEraseGame.grid(row=14, column=1)
+btnCheck.grid(row=14, column=2)
+
+
+
+
+
+
+
+def start():
+    global state, array
+
+
+    for button in buttons :
+        button["state"] = tk.NORMAL
+
+        if state =="empty":
+            state = "started"
+            btnStartGame["text"] = "Redo"
+            blank()
+
+
+def userInput(number):
+    global buttons, inputList
+
+
+    ImtiredOfAssigningVariable = str(number)
+    inputList = inputList + ImtiredOfAssigningVariable
+    arrayOfInput = list(inputList)
+    limit(arrayOfInput)
+    
+    print(arrayOfInput)
+    return(arrayOfInput)
+
+
+
+def limit(arrayOfInput):
+     global state, finalInput
+
+     if len(arrayOfInput) == 4:
+
+         finalInput = arrayOfInput
+         btnCheck["state"] = tk.NORMAL
+
+         for button in buttons :
+               button["state"] = tk.DISABLED
+               state ="empty"
+
+     elif len(arrayOfInput) == 0:
+         start()
+
+
+
+
+def blank():
+     global inputList, numberOfGuess
+
+     inputList = ''
+     numberOfGuess = 0
+
+
+
+def erase():
+    global inputList
+
+    inputList = ''
+    for button in buttons :
+        button["state"] = tk.NORMAL
+
+
+# Digits that are the correct number AND in the correct position ****First
+def position (arrayOfArrangement):
+    rightPosition = 0
+
+    for x in range (0,4):
+        if arrayOfInput[x] == arrayOfArrangement[x]:
+             arrayOfArrangement[x] = ''
+             arrayOfInput[x] = 'empty'
+             rightPosition += 1
+             print (arrayOfArrangement);
+
+    print (rightPosition);
+    return(rightPosition);
+
+
+
