@@ -439,8 +439,7 @@ def msgPercents (bothRight):
         
     percentText.config (text = str(percentMsg) + str(percentage) + "% correct out of 100.0%!")
 
-    
-
+   
     
 
 
@@ -449,5 +448,4 @@ def msgPercents (bothRight):
 # Main Program =============================
 
 gameTitle();
-
 
