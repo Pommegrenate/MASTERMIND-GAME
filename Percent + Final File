@@ -137,7 +137,7 @@ def howToPlay ():
                                  "but you only have 12 in total so be careful. \n\n"
                                  "To take another guess after you've checked your answer, press the 'Erase' button. \n\n"
                                  "If you do guess the correct code, then you win! You made it in time to save Alina \n"
-                                 "and beat Levoski!",
+                                 "and beat Levoski once and for all!",
                           justify = LEFT);
     instructions['font'] = ("Courier", 10);
     instructions.place (x = c, y = 250, anchor = 'center');
@@ -154,14 +154,12 @@ def howToPlay ():
 
 # Game Screen =============
 
-
-inputList = ''
 numberOfGuess = 0;
 
 c = 500/2;
 
 def game ():
-    global gameScreen, lblSecArrangement, percentText
+    global gameScreen, lblSecArrangement, percentText, inputText
     
     gameScreen = tk.Tk ();
     gameScreen.title("Catch Levoski: The Game");
@@ -175,15 +173,15 @@ def game ():
 
     lblNGuess = Label(gameScreen, text = "Number of Guesses:  " + str(numberOfGuess))
     lblNGuess['font'] = ("Helvetica", 15);
-    lblNGuess.place (x = c, y = 125, anchor = 'center');
+    lblNGuess.place (x = c, y = 75, anchor = 'center');
 
-    lblSecArrangement = Label(gameScreen, text="")
-    lblSecArrangement['font'] = ("Helvetica", 15);
-    lblSecArrangement.place (x = c, y = 175, anchor = 'center');
+    lblSecArrangement = Label(gameScreen, text = "", fg = "goldenrod");
+    lblSecArrangement['font'] = ("Helvetica", 18);
+    lblSecArrangement.place (x = c, y = 125, anchor = 'center');
 
-    percentText = Label (gameScreen, fg = "CadetBlue");
-    percentText['font'] = ("Helvetica", 13);
-    percentText.place (x = c, y = 350, anchor = 'center');
+    percentText = Label (gameScreen);
+
+    inputText = Label (gameScreen);
 
     gameButtons ();
 
@@ -233,7 +231,7 @@ def code ():
 
     arrayOfArrangement = list(secretArrangement);
 
-    print (arrayOfArrangement);
+##    print (arrayOfArrangement);  # To double check our code and see if input matches with secret arrangement
 
     return arrayOfArrangement
 
@@ -256,6 +254,8 @@ def start ():
             btnStartGame.place (x = c - 100, y = 500, anchor = 'center');
             
             btnCheck.place (x = c + 100, y = 500, anchor = 'center');
+            btnCheck["state"] = DISABLED
+            
             btnEraseGame.place (x = c + 25, y = 500, anchor = 'center');
             btnEraseGame["state"] = NORMAL
             
@@ -264,7 +264,9 @@ def start ():
 
 
 
-# Outputs the user's input in a list until it hits 4
+# Puts the user's inputs in a list
+inputList = ''
+
 def userInput(number):
     global buttons, inputList, arrayOfInput
 
@@ -274,7 +276,7 @@ def userInput(number):
     limit() #don't pass it
 
 
-# Creates a limit on how many numbers you can input to 4
+# Creates a limit on how many numbers you can input to be 4
 def limit(): #no parameter
     global state, arrayOfInput #add to globals in both defs
      
@@ -286,6 +288,8 @@ def limit(): #no parameter
         for button in buttons :
             button["state"] = DISABLED
             state ="empty"
+
+        inputDisplay ();
 
 
     else:
@@ -303,39 +307,65 @@ arrayOfInput= [] #declare here but empty
 
 # Makes numberOfGuess = 0 when you use press "Restart" button
 def blank():
-    global inputList, numberOfGuess
-    q=196
+    global inputList, numberOfGuess, percentText, inputText
 
     inputList = ''
     numberOfGuess = 0
     lblNGuess = Label(gameScreen, text = "Number of Guesses:  " + str(numberOfGuess));
     lblNGuess['font'] = ("Helvetica", 15);
-    lblNGuess.place (x = c, y = 125, anchor = 'center');
-    percentText.config (text = "")
+    lblNGuess.place (x = c, y = 75, anchor = 'center');
+
+    percentText.destroy ();
+    percentText = Label (gameScreen, fg = "CadetBlue");
+    percentText.place (x = c, y = 350, anchor = 'center');
+
+    indicClearer = Label (gameScreen, text = "                       ");
+    indicClearer['font'] = ("Helvetica", 20);
+    indicClearer.place (x = c, y = 260, anchor = 'center');
+
+    inputText.destroy ();
+    
 
 
 # Erases your current input and let's you make a new input
 def erase():
-    global inputList
+    global inputList, percentText, inputText
 
     inputList = ''
     for button in buttons :
          button["state"] = NORMAL
 
+    btnCheck["state"] = DISABLED
+
+    percentText.destroy ();
+    percentText = Label (gameScreen, fg = "CadetBlue");
+    percentText.place (x = c, y = 350, anchor = 'center');
+
+    indicClearer = Label (gameScreen, text = "                       ");
+    indicClearer['font'] = ("Helvetica", 20);
+    indicClearer.place (x = c, y = 260, anchor = 'center');
+
+    inputText.destroy ();
+
+    
 # Checks if userInput matches with secret arrangement + adds to numberOfGuess counter
 def check():
-    global numberOfGuess, arrayOfArrangement, arrayOfInput
+    global numberOfGuess, arrayOfArrangement, arrayOfInput, percentText
     
     numberOfGuess += 1
     
     lblNGuess = Label(gameScreen, text = "Number of Guesses:  " + str(numberOfGuess))
     lblNGuess['font'] = ("Helvetica", 15);
-    lblNGuess.place (x = c, y = 125, anchor = 'center');
+    lblNGuess.place (x = c, y = 75, anchor = 'center');
 
 
 
     if arrayOfInput == arrayOfArrangement:
-        percentText.config (text = "You did it! You solved the code in time! \nNow you can save Alina and catch Levoski. \n You got 100%!")
+        fullPercent = float(100);
+        percentText.config (text = "You did it! You solved the code in time! \n Now you can save Alina and catch Levoski. \n You got " + str(fullPercent) + "%!");
+        percentText['fg'] = "indian red";
+        percentText['font'] = ("Helvetica", 15);
+        
         for button in buttons:
             button["state"] = DISABLED
             btnCheck["state"] = DISABLED
@@ -343,7 +373,7 @@ def check():
         
         
     
-    if numberOfGuess == 4:
+    if numberOfGuess == 12:
         for button in buttons:
             button["state"] = DISABLED
 
@@ -354,8 +384,7 @@ def check():
 
         lblSecArrangement['text'] = "The secret code was: " + str(arrayOfArrangement)
 
-               
-          
+         
     position()
     
 
@@ -376,7 +405,7 @@ def position ():
          
 # Digits that are the correct number NOT in the correct position
 def wrongPosition (rightPosition):
-    rightNum = 0
+    rightNum = 0;
     count = 4;
     y = 0;
 
@@ -403,13 +432,12 @@ def wrongPosition (rightPosition):
 # Indicator stars
 def indicator (bothRight, oneRight):
     indicatorsTitle = Label(gameScreen, text = "Indicators");
-    indicatorsTitle['font'] = ("Helvetica", 17, "underline");
+    indicatorsTitle['font'] = ("Helvetica", 16, "underline");
     indicatorsTitle.place (x = c, y = 225, anchor = 'center');
     
     q = 196; # Placement of stars on x-axis
     
     # Position + number is correct
-
     for star in range (0, bothRight):
         bothIndic = Label (gameScreen, text = "*", fg = "red");
         bothIndic['font'] = ("Helvetica", 25);
@@ -433,25 +461,44 @@ def indicator (bothRight, oneRight):
         noneIndic.place (x = q, y = 250);
         q += 30;
 
-        msgPercents (bothRight)
+        msgPercents (bothRight);
 
 
+# Displays the user's input into the game window
+def inputDisplay ():
+    global inputText
+    
+    inputText = Label (gameScreen, text = "Your input: " + str(arrayOfInput), fg = "grey17");
+    inputText['font'] = ("Helvetica", 18);
+    inputText.place (x = c, y = 175, anchor = 'center');
 
 
+# Displays percentage of how many digits user got correct into the game window with a message
 def msgPercents (bothRight):
     global percentText
     
     percentage = float((bothRight / 4) * 100);
-    
-    if bothRight == 0:
-        percentMsg = "Ohh that's not the right code at all... Well keep trying FBL agent. \nWe won't fire you just because of this. \nYou got ";
-        percentText.config (text = str(percentMsg) + str(percentage) + "% correct out of 100.0%!")
-        
-        
+
+    if numberOfGuess == 12:
+        if arrayOfInput != arrayOfArrangement:
+            percentText.destroy ();
+            percentText = Label (gameScreen, text = "You've failed the mission! \n Levoski's kidnapped Alina and has run away. \n"
+                                                    "You're fired!! You don't deserve this badge \n or title as an FBL agent.", fg = "burlywood4");
+            percentText['font'] = ("Helvetica", 15);
+            percentText.place (x = c, y = 350, anchor = 'center');
+
     else:
-        percentMsg = "You're getting there. Once you unlock this door, Alina will be saved! \nYou got ";
-        percentText.config (text = str(percentMsg) + str(percentage) + "% correct out of 100.0%!")
-    
+        if bothRight == 0:
+            percentMsg = "Ohh that's not the right code at all... Well keep trying FBL agent. \n We won't fire you just because of this. Haha...\n You got ";
+            percentText.config (text = str(percentMsg) + str(percentage) + "% of the code correct!");
+            percentText['font'] = ("Helvetica", 13);
+            
+            
+        else:
+            percentMsg = "You're getting there. Once you unlock this door, Alina will be saved! \n You got ";
+            percentText.config (text = str(percentMsg) + str(percentage) + "% of the code correct!");
+            percentText['font'] = ("Helvetica", 13);
+        
 
    
    
