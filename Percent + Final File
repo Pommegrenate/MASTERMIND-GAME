@@ -222,7 +222,7 @@ def gameButtons ():
 state = "empty";
 
 def code ():
-    global arrayOfArrangement, backuplist
+    global arrayOfArrangement
      
     secretArrangement = ''
 
@@ -232,25 +232,26 @@ def code ():
         secretArrangement = secretArrangement + randomNumber;
 
     arrayOfArrangement = list(secretArrangement);
-    backuplist = arrayOfArrangement
 
     print (arrayOfArrangement);
 
     return arrayOfArrangement
 
 
-array = code()
 
 
 # Start button changes to "Restart" and will display the game buttons (restart, erase, check)
 def start ():
     global state
     
+    
+    
     for button in buttons :
         button["state"] = NORMAL
 
         if state =="empty":
             state = "started"
+            lblSecArrangement['text'] = ''
             btnStartGame["text"] = "Restart"
             btnStartGame.place (x = c - 100, y = 500, anchor = 'center');
             
@@ -303,12 +304,14 @@ arrayOfInput= [] #declare here but empty
 # Makes numberOfGuess = 0 when you use press "Restart" button
 def blank():
     global inputList, numberOfGuess
+    q=196
 
     inputList = ''
     numberOfGuess = 0
     lblNGuess = Label(gameScreen, text = "Number of Guesses:  " + str(numberOfGuess));
     lblNGuess['font'] = ("Helvetica", 15);
     lblNGuess.place (x = c, y = 125, anchor = 'center');
+    percentText.config (text = "")
 
 
 # Erases your current input and let's you make a new input
@@ -321,15 +324,26 @@ def erase():
 
 # Checks if userInput matches with secret arrangement + adds to numberOfGuess counter
 def check():
-    global numberOfGuess, arrayOfArrangement
+    global numberOfGuess, arrayOfArrangement, arrayOfInput
     
     numberOfGuess += 1
     
     lblNGuess = Label(gameScreen, text = "Number of Guesses:  " + str(numberOfGuess))
     lblNGuess['font'] = ("Helvetica", 15);
     lblNGuess.place (x = c, y = 125, anchor = 'center');
+
+
+
+    if arrayOfInput == arrayOfArrangement:
+        percentText.config (text = "You did it! You solved the code in time! \nNow you can save Alina and catch Levoski. \n You got 100%!")
+        for button in buttons:
+            button["state"] = DISABLED
+            btnCheck["state"] = DISABLED
+            btnEraseGame["state"] = DISABLED
+        
+        
     
-    if numberOfGuess == 2:
+    if numberOfGuess == 4:
         for button in buttons:
             button["state"] = DISABLED
 
@@ -339,6 +353,7 @@ def check():
         print ("The secret arragement was : ", arrayOfArrangement)
 
         lblSecArrangement['text'] = "The secret code was: " + str(arrayOfArrangement)
+
                
           
     position()
@@ -430,22 +445,18 @@ def msgPercents (bothRight):
     
     if bothRight == 0:
         percentMsg = "Ohh that's not the right code at all... Well keep trying FBL agent. \nWe won't fire you just because of this. \nYou got ";
+        percentText.config (text = str(percentMsg) + str(percentage) + "% correct out of 100.0%!")
         
-    elif bothRight == 4:
-        percentMsg = "You did it! You solved the code in time! \nNow you can save Alina and catch Levoski. \nYou got ";
         
     else:
         percentMsg = "You're getting there. Once you unlock this door, Alina will be saved! \nYou got ";
-        
-    percentText.config (text = str(percentMsg) + str(percentage) + "% correct out of 100.0%!")
-
-   
+        percentText.config (text = str(percentMsg) + str(percentage) + "% correct out of 100.0%!")
     
 
-
+   
+   
 
 
 # Main Program =============================
 
 gameTitle();
-
