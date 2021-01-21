@@ -220,20 +220,20 @@ def gameButtons ():
 state = "empty";
 
 def code ():
-    global arrayOfArrangement
+    global arrayOfSecrets
      
     secretArrangement = ''
 
-    while len(secretArrangement) != 4 :  # While the number of arrayOfArrangement is NOT 4
+    while len(secretArrangement) != 4 :  # While the number of arrayOfSecrets is NOT 4
 
         randomNumber = str(randint(1, 6)); # There are 6 numbers
         secretArrangement = secretArrangement + randomNumber;
 
-    arrayOfArrangement = list(secretArrangement);
+    arrayOfSecrets = list(secretArrangement);
 
-##    print (arrayOfArrangement);  # To double check our code and see if input matches with secret arrangement
+##    print (arrayOfSecrets);  # To double check our code and see if input matches with secret arrangement
 
-    return arrayOfArrangement
+    return arrayOfSecrets
 
 
 
@@ -259,7 +259,7 @@ def start ():
             btnEraseGame.place (x = c + 25, y = 500, anchor = 'center');
             btnEraseGame["state"] = NORMAL
             
-            array = code()
+            code()
             blank()
 
 
@@ -350,7 +350,7 @@ def erase():
     
 # Checks if userInput matches with secret arrangement + adds to numberOfGuess counter
 def check():
-    global numberOfGuess, arrayOfArrangement, arrayOfInput, percentText
+    global numberOfGuess, arrayOfSecrets, arrayOfInput, percentText
     
     numberOfGuess += 1
     
@@ -360,7 +360,7 @@ def check():
 
 
 
-    if arrayOfInput == arrayOfArrangement:
+    if arrayOfInput == arrayOfSecrets:
         fullPercent = float(100);
         percentText.config (text = "You did it! You solved the code in time! \n Now you can save Alina and catch Levoski. \n You got " + str(fullPercent) + "%!");
         percentText['fg'] = "indian red";
@@ -380,9 +380,9 @@ def check():
         btnCheck["state"] = DISABLED
         btnEraseGame["state"] = DISABLED
 
-        print ("The secret arragement was : ", arrayOfArrangement)
+        print ("The secret arragement was : ", arrayOfSecrets)
 
-        lblSecArrangement['text'] = "The secret code was: " + str(arrayOfArrangement)
+        lblSecArrangement['text'] = "The secret code was: " + str(arrayOfSecrets)
 
          
     position()
@@ -390,14 +390,14 @@ def check():
 
 # Digits that are the correct number AND in the correct position ****First
 def position ():
-    global lol, rightPosition
+    global arrayForCheck, rightPosition
      
-    lol = arrayOfArrangement[:]
+    arrayForCheck = arrayOfSecrets[:]
     rightPosition = 0
 
     for x in range (0,4):
-        if arrayOfInput[x] == lol[x]:
-            lol[x] = ''
+        if arrayOfInput[x] == arrayForCheck[x]:
+            arrayForCheck[x] = ''
             arrayOfInput[x] = 'empty'
             rightPosition += 1
                
@@ -411,9 +411,9 @@ def wrongPosition (rightPosition):
 
     while count != 0:
         for item in range (0, 4):
-            if arrayOfInput[y] == lol[item]:
+            if arrayOfInput[y] == arrayForCheck[item]:
                 arrayOfInput[y] = 'empty'
-                lol[item] = ''
+                arrayForCheck[item] = ''
                 rightNum += 1;  
                    
         y += 1
@@ -480,7 +480,7 @@ def msgPercents (bothRight):
     percentage = float((bothRight / 4) * 100);
 
     if numberOfGuess == 12:
-        if arrayOfInput != arrayOfArrangement:
+        if arrayOfInput != arrayOfSecrets:
             percentText.destroy ();
             percentText = Label (gameScreen, text = "You've failed the mission! \n Levoski's kidnapped Alina and has run away. \n"
                                                     "You're fired!! You don't deserve this badge \n or title as an FBL agent.", fg = "burlywood4");
